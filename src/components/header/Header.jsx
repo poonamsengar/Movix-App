@@ -3,7 +3,6 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import "./style.scss";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
@@ -64,8 +63,12 @@ const Header = () => {
     const navigationHandler = (type) => {
         if (type === "movie") {
             navigate("/explore/movie");
-        } else {
+        } else if(type=="tv") {
             navigate("/explore/tv");
+        }
+        else{
+            navigate("./singIn/SingIn");
+
         }
         setMobileMenu(false);
     };
@@ -89,9 +92,13 @@ const Header = () => {
                     >
                         TV Shows
                     </li>
+                    <li className="menuItem" onClick={() => navigationHandler("SigIn")}>SignIn</li>
+                    
                     <li className="menuItem">
                         <HiOutlineSearch onClick={openSearch} />
                     </li>
+                
+                    
                 </ul>
 
                 <div className="mobileMenuItems">

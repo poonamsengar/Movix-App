@@ -1,0 +1,45 @@
+.SignIn{
+    position: relative;
+    top: 4rem;
+    height: 26rem;
+    .InsidePage{
+        padding-top:.5em!important;
+        margin-bottom: -30vh; 
+        // background-color:#fff;
+        box-shadow:inset;
+        z-index:-998;
+        width: 30rem;
+        height: 25rem;
+        text-align: center;
+        margin: auto;
+        >h1{
+            line-height: 5rem;
+            color: #fff;
+        }
+        
+    }
+}
+input{
+    display: block;
+    font-size: larger;
+    color: #7f7d7c;
+    margin:auto;
+    width: 20rem;
+    height: 3rem;
+    max-width: 30vw;
+    min-width: 10vw;
+    outline: none;
+    transition: all ease-out 2s ;
+    text-indent: 20px;
+    border: none;
+}
+button{
+    cursor: pointer;
+    float: right;
+    background-origin: padding-box;
+    user-select: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    color: white;
+}
