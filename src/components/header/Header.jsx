@@ -81,7 +81,7 @@ const Header = () => {
         <div className="logo" onClick={() => navigate("/")}>
           <img src={logo} alt="" />
         </div>
-        <h3 style={{color:"white"}}>Welcome👋 {userEmail.name} 🎞️</h3>
+        <h3 style={{color:"white"}}>Welcome👋</h3>
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
             Movies
