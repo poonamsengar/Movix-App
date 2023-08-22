@@ -8,7 +8,9 @@ import {
 } from "react-icons/fa";
 
 const SignIn = () => {
+
   const [input, setInput] = useState({
+    name:"",
     email: "",
     password: "",
   });
@@ -28,17 +30,12 @@ const SignIn = () => {
       alert("Email and Password incorrect");
     }
   };
-  
-    const eyedroper = (eyedroper) =>{
-      if(!eyedroper){
-        <FaRegEye/>
-      }
-    }
+
   return (
     <form onSubmit={handelLogin} className="form-Register">
-          <h1>SignIn</h1>
       <div className="insideForm">
-        <label>user email</label> <br />
+      <h1>SignIn</h1>
+      <label>user email</label> <br />
         <input
           className="insideInput"
           autoComplete="off"
@@ -66,7 +63,7 @@ const SignIn = () => {
             setInput({ ...input, [e.target.name]: e.target.value })
           }
         />
-           <span className="iconn" onClick={eyedroper}>
+           <span className="iconn" >
             <FaRegEye />
           </span>
         <br />

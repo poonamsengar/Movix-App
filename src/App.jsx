@@ -17,7 +17,7 @@ import Register from "./pages/singIn/Register";
 function App() {
   const dispatch = useDispatch();
   const { url } = useSelector((state) => state.home);
-  console.log(url);
+  // console.log(url);
 
   useEffect(() => {
     fetchApiConfig();
