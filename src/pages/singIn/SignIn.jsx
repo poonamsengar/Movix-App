@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "./style.scss"
+import "./style.scss";
+import {
+  FaRegUser,
+  FaRegEye,
+} from "react-icons/fa";
 
 const SignIn = () => {
   const [input, setInput] = useState({
@@ -24,33 +28,55 @@ const SignIn = () => {
       alert("Email and Password incorrect");
     }
   };
+  
+    const eyedroper = (eyedroper) =>{
+      if(!eyedroper){
+        <FaRegEye/>
+      }
+    }
   return (
     <form onSubmit={handelLogin} className="form-Register">
-      <label>user email</label> <br />
-      <input
-        type="email"
-        placeholder="enter email"
-        name="email"
-        value={input.email}
-        onChange={(e) =>
-          setInput({ ...input, [e.target.name]: e.target.value })
-        }
-      />
-      <br />
-      <label>user password</label>
-      <br />
-      <input
-        type="password"
-        placeholder="enter password"
-        name="password"
-        value={input.password}
-        onChange={(e) =>
-          setInput({ ...input, [e.target.name]: e.target.value })
-        }
-      />
-      <br />
-      <button type="submit">Login</button>
-      <Link to="/Register"> <u>Register</u></Link>
+          <h1>SignIn</h1>
+      <div className="insideForm">
+        <label>user email</label> <br />
+        <input
+          className="insideInput"
+          autoComplete="off"
+          type="email"
+          placeholder="enter email"
+          name="email"
+          value={input.email}
+          onChange={(e) =>
+            setInput({ ...input, [e.target.name]: e.target.value })
+          }
+        />
+         <span className="iconn">
+            <FaRegUser />
+          </span>
+        <br />
+        <label>user password</label>
+        <br />
+        <input
+          className="insideInput"
+          type="password"
+          placeholder="enter password"
+          name="password"
+          value={input.password}
+          onChange={(e) =>
+            setInput({ ...input, [e.target.name]: e.target.value })
+          }
+        />
+           <span className="iconn" onClick={eyedroper}>
+            <FaRegEye />
+          </span>
+        <br />
+        <button type="submit" className="btn-Submit">
+          Login
+        </button>
+        <Link to="/Register" className="reg">
+          <u >Register</u>
+        </Link>
+      </div>
     </form>
   );
 };
