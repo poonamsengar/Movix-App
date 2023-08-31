@@ -5,10 +5,11 @@ import "./style.scss";
 import {
   FaRegUser,
   FaRegEye,
+  FaRedRiver,
 } from "react-icons/fa";
 
 const SignIn = () => {
-
+  const [visible, setvisivle] = useState(false);
   const [input, setInput] = useState({
     name:"",
     email: "",
@@ -30,7 +31,6 @@ const SignIn = () => {
       alert("Email and Password incorrect");
     }
   };
-
   return (
     <form onSubmit={handelLogin} className="form-Register">
       <div className="insideForm">
@@ -55,7 +55,7 @@ const SignIn = () => {
         <br />
         <input
           className="insideInput"
-          type="password"
+          type={visible ? "text" : "password"}
           placeholder="enter password"
           name="password"
           value={input.password}
@@ -63,8 +63,8 @@ const SignIn = () => {
             setInput({ ...input, [e.target.name]: e.target.value })
           }
         />
-           <span className="iconn" >
-            <FaRegEye />
+           <span className="iconn"  onClick={()=> setvisivle(!visible)}>
+           {visible ?  <FaRegEye /> : <FaRedRiver />}
           </span>
         <br />
         <button type="submit" className="btn-Submit">
