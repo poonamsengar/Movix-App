@@ -69,19 +69,20 @@ const Header = () => {
     setMobileMenu(false);
   };
   const userEmail = JSON.parse(localStorage.getItem("user"));
+  const loggedin = JSON.parse(localStorage.getItem("loggedin"));
+  console.log(loggedin)
   const handelLogout = () => {
-    localStorage.removeItem("loggedin");
+    localStorage.setItem("loggedin", false);
     navigate("/SignIn");
   };
-  console.log(userEmail);
 
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <div className="logo" onClick={() => navigate("/")}>
+        <div className="logo" onClick={() => navigate("/")}> 
           <img src={logo} alt="" />
         </div>
-        <h3 style={{color:"white"}}>Welcome👋</h3>
+        <h3 style={{color:"white"}}>{ loggedin==true ? `welcome, ${userEmail.name}` : "" }</h3>
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
             Movies

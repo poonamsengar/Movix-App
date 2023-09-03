@@ -1,31 +1,45 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
-import { FaRegUser, FaRegEye, FaUserNinja } from "react-icons/fa";
+import { FaRegUser, FaRegEye, FaUserNinja, FaRedRiver } from "react-icons/fa";
 
 const Register = () => {
   const navigate = useNavigate();
-  const [input, setInput] = useState({
-    email: "",
-    password: "",
-  });
-  
-  const handelSubmit = (e) => {
-    e.preventDefault();
+  const [visible, setvisivle] = useState(false)
+  const [Confimvisible, setConfimVisivle] = useState(false)
 
-    if(
-      input.email == "" && input.password == ""){
-      alert("please filled the mendotory information");
-    }else{
-      localStorage.setItem("user", JSON.stringify(input));
-      navigate("/")
+  const [message, setmessage] = useState('');
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    password:"",
+    ConfimPassword: "",
+  }); 
+
+ 
+  const FormhandelSubmit = (e) => {
+    e.preventDefault();
+   
+    const regExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
+
+    if (input.password === "" ) {
+      setmessage("please enter password");
+    }
+    else if (!regExp.test(input.password) || !regExp.test(input.ConfimPassword)) {
+      setmessage("password not is valid");
+    }
+    else if (regExp.test(input.password) && regExp.test(input.ConfimPassword)) {
+      setmessage("password is  valid");
+      navigate("/SignIn");
+      localStorage.setItem("user",JSON.stringify(input));
     }
   };
+
   return (
-    <form onSubmit={handelSubmit} className="form-Register">
+    <form onSubmit={FormhandelSubmit} className="form-Register">
       <div className="insideForm">
-      <h1>SignUp</h1>
-      
+        <h1>SignUp</h1>
+
         <label>user name</label> <br />
         <input
           className="insideInput"
@@ -38,11 +52,12 @@ const Register = () => {
             setInput({ ...input, [e.target.name]: e.target.value })
           }
         />
-           <span className="iconn">
+        <span className="iconn">
           <FaRegUser />
         </span>
-        <br/>
-      <label>user email</label> <br />
+        {/* <p style={{marginLeft:"2rem", color: "red" }}>{message}</p> */}
+        <br />
+        <label>user email</label> <br />
         <input
           className="insideInput"
           autoComplete="off"
@@ -57,23 +72,42 @@ const Register = () => {
         <span className="iconn">
           <FaUserNinja />
         </span>
+        {/* <p style={{marginLeft:"2rem", color: "red" }}>{message}</p> */}
         <br />
-        <label>user password</label>
+        <label>Enter Password</label>
         <br />
         <input
           className="insideInput"
           autoComplete="off"
-          type="password"
-          placeholder="enter password"
+          type={visible ? "text" : "password"}
+          placeholder="Enter password"
           name="password"
           value={input.password}
           onChange={(e) =>
             setInput({ ...input, [e.target.name]: e.target.value })
           }
         />
-        <span className="iconn">
-          <FaRegEye />
+        <span className="iconn" onClick={() => setvisivle(!visible)}>
+          {visible ? <FaRegEye /> : <FaRedRiver />}
         </span>
+      <p style={{marginLeft:"2rem", color: "red" }}>{message}</p>
+        <br />
+        <label>Confim password</label>
+        <input
+          className="insideInput"
+          autoComplete="off"
+          type={Confimvisible ? "text" : "password"}
+          placeholder="Confim password"
+          name="ConfimPassword"
+          value={input.ConfimPassword}
+          onChange={(e) =>
+            setInput({ ...input, [e.target.name]: e.target.value })
+          }
+        />
+        <span className="iconn" onClick={() => setConfimVisivle(!Confimvisible)}>
+          {Confimvisible ? <FaRegEye /> : <FaRedRiver />}
+        </span>
+        <p style={{marginLeft:"2rem", color: "red" }}>{message}</p>
         <br />
         <button type="submit" className="btn-Submit">
           Register

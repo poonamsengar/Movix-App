@@ -10,10 +10,10 @@ import {
 
 const SignIn = () => {
   const [visible, setvisivle] = useState(false);
+
   const [input, setInput] = useState({
-    name:"",
     email: "",
-    password: "",
+    password: ""
   });
 
   const navigate = useNavigate();
@@ -23,19 +23,21 @@ const SignIn = () => {
 
     if (
       input.email === loggedUser.email &&
-      input.password === loggedUser.password
+      input.password === loggedUser.password 
     ) {
       localStorage.setItem("loggedin", true);
       navigate("/");
-    } else {
-      alert("Email and Password incorrect");
+    } 
+     else {
+      alert("please fill Email and Password ");
     }
   };
+
   return (
     <form onSubmit={handelLogin} className="form-Register">
       <div className="insideForm">
-      <h1>SignIn</h1>
-      <label>user email</label> <br />
+        <h1>SignIn</h1>
+        <label>user email</label> <br />
         <input
           className="insideInput"
           autoComplete="off"
@@ -47,11 +49,11 @@ const SignIn = () => {
             setInput({ ...input, [e.target.name]: e.target.value })
           }
         />
-         <span className="iconn">
-            <FaRegUser />
-          </span>
+        <span className="iconn">
+          <FaRegUser />
+        </span>
         <br />
-        <label>user password</label>
+        <label>Enter password</label>
         <br />
         <input
           className="insideInput"
@@ -63,10 +65,10 @@ const SignIn = () => {
             setInput({ ...input, [e.target.name]: e.target.value })
           }
         />
-           <span className="iconn"  onClick={()=> setvisivle(!visible)}>
-           {visible ?  <FaRegEye /> : <FaRedRiver />}
-          </span>
-        <br />
+        <span className="iconn" onClick={() => setvisivle(!visible)}>
+          {visible ? <FaRegEye /> : <FaRedRiver />}
+        </span>
+        <br />        
         <button type="submit" className="btn-Submit">
           Login
         </button>
