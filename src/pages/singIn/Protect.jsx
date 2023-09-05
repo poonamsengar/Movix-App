@@ -4,7 +4,7 @@ import "./style.scss"
 
 const Protect = () => {
     const token = localStorage.getItem('loggedin')
-  return token? <Outlet/> : <Navigate to = {"/SignIn"} />
+  return token ? <Outlet/> : <Navigate to = {"/SignIn"} />
 }
 
 export default Protect

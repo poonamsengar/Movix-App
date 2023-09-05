@@ -65,14 +65,14 @@ const Header = () => {
       navigate("/explore/movie");
     } else if (type == "tv") {
       navigate("/explore/tv");
-    }
+    } 
     setMobileMenu(false);
   };
   const userEmail = JSON.parse(localStorage.getItem("user"));
   const loggedin = JSON.parse(localStorage.getItem("loggedin"));
-  console.log(loggedin)
+  // console.log(loggedin)
   const handelLogout = () => {
-    localStorage.setItem("loggedin", false);
+    localStorage.removeItem("loggedin", true);
     navigate("/SignIn");
   };
 
@@ -82,7 +82,7 @@ const Header = () => {
         <div className="logo" onClick={() => navigate("/")}> 
           <img src={logo} alt="" />
         </div>
-        <h3 style={{color:"white"}}>{ loggedin==true ? `welcome, ${userEmail.name}` : "" }</h3>
+        <h3 style={{color:"white"}}>{ loggedin ? `welcome, ${userEmail.name}` : "" }</h3>
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
             Movies

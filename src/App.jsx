@@ -68,11 +68,11 @@ function App() {
         /**
         Protect Routes Start  Here
          */
-        <Route path="/" element={<Protect />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/:mediaType/:id" element={<Details />} />
-        <Route path="/search/:query" element={<SearchResult />} />
-        <Route path="/explore/:mediaType" element={<Explore />} />
+        <Route path="/" element={<Protect />} >
+          <Route path="/" element={<Home />} />
+          <Route path="/:mediaType/:id" element={<Details />} />
+          <Route path="/search/:query" element={<SearchResult />} />
+          <Route path="/explore/:mediaType" element={<Explore />} />
         </Route>
         /** Protect routes end */ 
       </Routes>
