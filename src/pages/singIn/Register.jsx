@@ -54,7 +54,7 @@ const Register = () => {
         />
         <span className="iconn">
           <FaRegUser />
-        </span>
+        </span> 
         {/* <p style={{marginLeft:"2rem", color: "red" }}>{message}</p> */}
         <br />
         <label>user email</label> <br />
