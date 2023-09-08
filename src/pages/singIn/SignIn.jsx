@@ -28,10 +28,11 @@ const SignIn = () => {
       input.password === loggedUser.password 
     ) {
       localStorage.setItem("loggedin", true);
+      swal("Conratulation you  Login!", "", "success");
       navigate("/");
     } 
      else {
-        swal("Good job!", "Congratulation you Login", "success");
+        swal("please insert detail for Login!", "", "warning");
     }
   };
 
