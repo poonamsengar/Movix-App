@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "./style.scss";
 import { FaRegUser, FaRegEye, FaUserNinja, FaRedRiver } from "react-icons/fa";
 import swal from 'sweetalert';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Register = () => {
   const navigate = useNavigate();
@@ -24,20 +27,54 @@ const Register = () => {
     const regExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
 
     if (input.password === "" ) {
-      setmessage("please enter password");
+      toast.error('Fill the details ', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
     }
-    else if (!regExp.test(input.password) || !regExp.test(input.ConfimPassword)) {
-      setmessage("password not is valid");
+    else if (!regExp.test(input.password) === regExp.test(input.ConfimPassword)) {
+      toast.warn('Please match Password ', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+     
     }
-    else if (regExp.test(input.password) && regExp.test(input.ConfimPassword)) {
+    else if ((input.email === "") || (input.password === "") && !regExp.test(input.password) === regExp.test(input.ConfimPassword)) {
+      toast.warn('to fill all mendtory info ', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+     
+    }
+    else if (regExp.test(input.password) && regExp.test(input.ConfimPassword) && (input.name) && (input.email)) {
       setmessage("password is  valid");
       navigate("/SignIn");
       swal("Good job!", "Congratulation you registered", "success");
       localStorage.setItem("user",JSON.stringify(input));
+
     }
   };
 
   return (
+    <>
     <form onSubmit={FormhandelSubmit} className="form-Register">
       <div className="insideForm">
         <h1>SignUp</h1>
@@ -57,7 +94,6 @@ const Register = () => {
         <span className="iconn">
           <FaRegUser /> 
         </span>  
-        {/* <p style={{marginLeft:"2rem", color: "red" }}>{message}</p> */}
         <br />
         <label>user email</label> <br />
         <input
@@ -74,7 +110,6 @@ const Register = () => {
         <span className="iconn">
           <FaUserNinja />
         </span>
-        {/* <p style={{marginLeft:"2rem", color: "red" }}>{message}</p> */}
         <br />
         <label>Enter Password</label>
         <br />
@@ -111,11 +146,13 @@ const Register = () => {
         </span>
         <p style={{marginLeft:"2rem", color: "red" }}>{message}</p>
         <br />
-        <button type="submit" className="btn-Submit">
-          Register
-        </button>
+        <button type="submit" className="btn-Submit">Register</button>
       </div>
     </form>
+    <ToastContainer/>
+
+    {/* <Toast/> */}
+    </>
   );
 };
 

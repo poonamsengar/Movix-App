@@ -8,7 +8,8 @@ import {
   FaRedRiver,
 } from "react-icons/fa";
 import swal from 'sweetalert';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
   const [visible, setvisivle] = useState(false);
@@ -28,15 +29,97 @@ const SignIn = () => {
       input.password === loggedUser.password 
     ) {
       localStorage.setItem("loggedin", true);
-      swal("Conratulation you  Login!", "", "success");
       navigate("/");
+      swal("Conratulation you  Login!", "", "success");
     } 
-     else {
-        swal("please insert detail for Login!", "", "warning");
+ 
+    else if( input.email === "" && input.password === ""){
+      toast.error(' Please fill the all detail is mendatory', {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
     }
+    else if(input.email === "" ){
+      toast.warn(' Please fill the email', {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+    else if(input.password === ""){
+      toast.warn(' Please fill the password', {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+    else  if (
+      input.email !== loggedUser.email &&
+      input.password == loggedUser.password 
+    ) {
+      toast.error(' Please insert valid email', {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+    else  if (
+      input.email === loggedUser.email &&
+      input.password !== loggedUser.password 
+    ) {
+      toast.error(' Please insert valid password', {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+
+    else  if (
+      input.email !== loggedUser.email &&
+      input.password !== loggedUser.password 
+    ) {
+      toast.error(' Please insert valid email password', {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+
   };
 
   return (
+    <>
     <form onSubmit={handelLogin} className="form-Register">
       <div className="insideForm">
         <h1>SignIn</h1>
@@ -80,6 +163,8 @@ const SignIn = () => {
         </Link>
       </div>
     </form>
+    <ToastContainer/>
+</>
   );
 };
 
