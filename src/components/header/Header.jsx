@@ -84,6 +84,9 @@ const Header = () => {
         </div>
         <h3 style={{color:"white"}}>{ loggedin ? `welcome, ${userEmail.name}` : "" }</h3>
         <ul className="menuItems">
+        <li className="menuItem">
+            <HiOutlineSearch onClick={openSearch} />
+          </li>
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
             Movies
           </li>
@@ -92,10 +95,6 @@ const Header = () => {
           </li>
           <li className="menuItem" onClick={handelLogout}>
             logout
-          </li>
-
-          <li className="menuItem">
-            <HiOutlineSearch onClick={openSearch} />
           </li>
         </ul>
 
