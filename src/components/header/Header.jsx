@@ -4,6 +4,7 @@ import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./style.scss";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
@@ -14,6 +15,7 @@ const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [query, setQuery] = useState("");
   const [showSearch, setShowSearch] = useState("");
+  const [showlogout, setlogout] = useState(false)
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -65,7 +67,7 @@ const Header = () => {
       navigate("/explore/movie");
     } else if (type == "tv") {
       navigate("/explore/tv");
-    } 
+    }
     setMobileMenu(false);
   };
   const userEmail = JSON.parse(localStorage.getItem("user"));
@@ -79,23 +81,26 @@ const Header = () => {
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <div className="logo" onClick={() => navigate("/")}> 
-          <img src={logo} alt="" />
-        </div>
-        <h3 style={{color:"white"}}>{ loggedin ? `welcome, ${userEmail.name}` : "" }</h3>
+         <div className="logo" onClick={() => navigate("/")}>
+          <img src={logo} alt="" /> 
+        </div> 
+        <h3 style={{ color: "white" }}>{loggedin ? `welcome, ${userEmail.name}` : ""}</h3>
         <ul className="menuItems">
-        <li className="menuItem">
-            <HiOutlineSearch onClick={openSearch} />
-          </li>
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
             Movies
           </li>
           <li className="menuItem" onClick={() => navigationHandler("tv")}>
             TV Shows
           </li>
-          <li className="menuItem" onClick={handelLogout}>
-            logout
+          <li className="menuItem" onClick={handelLogout} >
+            {loggedin ? "logout" : " "}
           </li>
+      
+          <li className="menuItem">
+            <HiOutlineSearch onClick={openSearch} /> 
+          </li>  
+         
+          
         </ul>
 
         <div className="mobileMenuItems">

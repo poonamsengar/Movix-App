@@ -23,7 +23,7 @@ const SignIn = () => {
   const handelLogin = (e) => {
     e.preventDefault();
     const loggedUser = JSON.parse(localStorage.getItem("user"));
-
+    
     if (
       input.email === loggedUser.email &&
       input.password === loggedUser.password 

@@ -11,10 +11,10 @@ const Register = () => {
   const navigate = useNavigate();
   const [visible, setvisivle] = useState(false)
   const [Confimvisible, setConfimVisivle] = useState(false)
+  const [registration, setRegistraion] = useState("")
+  const [message , setMassage] = useState(false)
+  const [Confimmessage , ConfimsetMassage] = useState(false)
 
-
-  const [passwordError, setPasswordErr] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -22,110 +22,134 @@ const Register = () => {
     ConfimPassword: "",
   });
 
-
   const FormhandelSubmit = (e) => {
-    e.preventDefault();
-    const passwordInputValue = e.target.value.trim();
-    const passwordInputFieldName = e.target.name;
-    const NewPasswordInput = { ...input, [passwordInputFieldName]: passwordInputValue }
+    e.preventDefault()
+    const reg = /^[0-9A-Za-z]{3,16}$/
 
-    setInput(NewPasswordInput);
+    if (!input.name) {
+      toast.error('Fill the details ', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    else if (!reg.test(input.name)) {
+      toast.error('please insert valid username ', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    else if (typeof input.email !== "undefined") {
+      var pattern = new RegExp(
+        /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+      );
+      if (!pattern.test(input.email)) {
+        toast.warn('Please enter valid email address.', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    }
 
-    // const regExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
-
-    if (passwordInputFieldName === 'password') {
+    if (input.password )  {
       const uppercaseRegExp = /(?=.*?[A-Z])/;
       const lowercaseRegExp = /(?=.*?[a-z])/;
       const digitsRegExp = /(?=.*?[0-9])/;
       const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/;
       const minLengthRegExp = /.{8,}/;
-      const passwordLength = passwordInputValue.length;
-      const uppercasePassword = uppercaseRegExp.test(passwordInputValue);
-      const lowercasePassword = lowercaseRegExp.test(passwordInputValue);
-      const digitsPassword = digitsRegExp.test(passwordInputValue);
-      const specialCharPassword = specialCharRegExp.test(passwordInputValue);
-      const minLengthPassword = minLengthRegExp.test(passwordInputValue);
-     
-      let errMsg = "";
 
-      if (passwordLength === 0) {
-        errMsg = "Password is empty";
-      } else if (!uppercasePassword) {
-        errMsg = "At least one Uppercase";
-      } else if (!lowercasePassword) {
-        errMsg = "At least one Lowercase";
-      } else if (!digitsPassword) {
-        errMsg = "At least one digit";
-      } else if (!specialCharPassword) {
-        errMsg = "At least one Special Characters";
-      } else if (!minLengthPassword) {
-        errMsg = "At least minumum 8 characters";
-      } else {
-        errMsg = "";
-      }
-      setPasswordErr(errMsg);
+      const uppercasePassword = uppercaseRegExp.test(input.password)
+      const lowercasePassword = lowercaseRegExp.test(input.password)
+      const digitsPassword = digitsRegExp.test(input.password );
+      const specialCharPassword = specialCharRegExp.test(input.password );
+      const minLengthPassword = minLengthRegExp.test(input.password );
+
+        if (!input.password) {
+          setMassage("Password is empty")
+        } else if (!uppercasePassword) {
+          setMassage("At least one Uppercase")
+        } else if (!lowercasePassword) {
+          setMassage("At least one Lowercase")
+        } else if (!digitsPassword) {
+          setMassage("At least one digit")
+        } else if (!specialCharPassword) {
+          setMassage("At least one Special Characters")
+        } else if (!minLengthPassword) {
+          setMassage("At least minumum 8 characters")
+        }else{
+          setMassage("only password successfull");
+          localStorage.setItem("user", JSON.stringify(input));
+        }
+    }
+    if (input.ConfimPassword )  {
+      const uppercaseRegExp = /(?=.*?[A-Z])/;
+      const lowercaseRegExp = /(?=.*?[a-z])/;
+      const digitsRegExp = /(?=.*?[0-9])/;
+      const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/;
+      const minLengthRegExp = /.{8,}/;
+
+      const uppercasePassword = uppercaseRegExp.test(input.ConfimPassword)
+      const lowercasePassword = lowercaseRegExp.test(input.ConfimPassword)
+      const digitsPassword = digitsRegExp.test(input.ConfimPassword );
+      const specialCharPassword = specialCharRegExp.test(input.ConfimPassword );
+      const minLengthPassword = minLengthRegExp.test(input.ConfimPassword );
+
+        if (!input.ConfimPassword) {
+          ConfimsetMassage("Password is empty")
+        } else if (!uppercasePassword) {
+          ConfimsetMassage("At least one Uppercase")
+        } else if (!lowercasePassword) {
+          ConfimsetMassage("At least one Lowercase")
+        } else if (!digitsPassword) {
+          ConfimsetMassage("At least one digit")
+        } else if (!specialCharPassword) {
+          ConfimsetMassage("At least one Special Characters")
+        } else if (!minLengthPassword) {
+          ConfimsetMassage("At least minumum 8 characters")
+        }else{
+          ConfimsetMassage("only password successfull");
+          localStorage.setItem("user", JSON.stringify(input));
+          navigate('/signIn')
+          swal("Good job!", "Congratulation you registered", "success");
+
+        }
     }
 
-    if(passwordInputFieldName === "confirmPassword" || (passwordInputFieldName==="password" && passwordInput.confirmPassword.length>0) ){
-            
-      if(input.ConfimPassword!== input.password)
-      {
-      setConfirmPasswordError("Confirm password is not matched");
-      }else{
-      setConfirmPasswordError("");
-      }
-      
-  }
-}
 
-    // if (input.password === "" ) {
-    //   toast.error('Fill the details ', {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "dark",
-    //     });
-    // }
-    // else if (regExp.test(input.password) || regExp.test(input.ConfimPassword) || input.ConfimPassword == input.password) {
-    //   toast.warn('Please  match Password ', {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "dark",
-    //     });
-
-    // }
-    // else if ((input.email === "") || (input.password === "")) {
-    //   toast.warn('to fill all mendtory info ', {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "dark",
-    //     });
-    // }
     // else{
-    //   // setmessage("password is  valid");
-    //   navigate("/SignIn");
+    //   alert("succeesssfull")
+    //    swal("Good job!", "Congratulation you registered", "success");
+    //    localStorage.setItem("user", JSON.stringify(input));
+    //  }
+   
+    // else{
+    //   if(input.password === input.ConfimPassword){
+    //     alert("succeesssfull")
     //   swal("Good job!", "Congratulation you registered", "success");
-    //   localStorage.setItem("user",JSON.stringify(input));
+    //   localStorage.setItem("user", JSON.stringify(input));
+   
+    //   }
 
     // }
 
-
-  // };
-
+  }
   return (
     <>
       <form onSubmit={FormhandelSubmit} className="form-Register">
@@ -135,7 +159,7 @@ const Register = () => {
           <input
             className="insideInput"
             autoComplete="off"
-            type="name"
+            type="text"
             placeholder="enter name"
             name="name"
             value={input.name}
@@ -146,6 +170,7 @@ const Register = () => {
           <span className="iconn">
             <FaRegUser />
           </span>
+          {/* <p style={{ marginLeft: "2rem", color: "red" }}>{message}</p> */}
           <br />
           <label>user email</label> <br />
           <input
@@ -196,7 +221,7 @@ const Register = () => {
           <span className="iconn" onClick={() => setConfimVisivle(!Confimvisible)}>
             {Confimvisible ? <FaRegEye /> : <FaRedRiver />}
           </span>
-          <p style={{ marginLeft: "2rem", color: "red" }}>{message}</p>
+          <p style={{ marginLeft: "2rem", color: "red" }}>{Confimmessage}</p>
           <br />
           <button type="submit" className="btn-Submit">Register</button>
         </div>
