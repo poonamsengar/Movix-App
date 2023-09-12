@@ -95,7 +95,6 @@ const Header = () => {
           <li className="menuItem" onClick={handelLogout} >
             {loggedin ? "logout" : " "}
           </li>
-      
           <li className="menuItem">
             <HiOutlineSearch onClick={openSearch} /> 
           </li>  
