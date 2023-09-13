@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 import "./style.scss";
 import { FaRegUser, FaRegEye, FaUserNinja, FaRedRiver } from "react-icons/fa";
 import swal from 'sweetalert';
@@ -11,9 +11,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [visible, setvisivle] = useState(false)
   const [Confimvisible, setConfimVisivle] = useState(false)
-  const [message , setMassage] = useState(false)
-  const [Confimmessage , ConfimsetMassage] = useState(false)
-
+ 
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -22,7 +20,7 @@ const Register = () => {
   });
   const FormhandelSubmit = (e) => {
     e.preventDefault()
-    const reg = /^[0-9A-Za-z]{3,16}$/
+    const reg = /^[0-9A-Za-z]{5,16}$/
 
     if (!input.name) {
       toast.error('Fill the name ', {
@@ -38,9 +36,9 @@ const Register = () => {
     }
     else if (!reg.test(input.name)) {
      
-      toast.warn ('please insert valid username ', {
+      toast.warn ('please insert [A-Z] [a-z] username ', {
         position: "bottom-right",
-        autoClose: 1000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -52,7 +50,7 @@ const Register = () => {
     if (!input.email) {
       toast.error('Fill the email ', {
         position: "bottom-right",
-        autoClose: 1000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -69,7 +67,7 @@ const Register = () => {
       if (!pattern.test(input.email)) {
         toast.warn('Please enter valid email address.', {
           position: "bottom-right",
-          autoClose: 1000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -82,7 +80,7 @@ const Register = () => {
     if (!input.password) {
       toast.error('fill the password!', {
         position: "bottom-right",
-        autoClose: 1000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -108,7 +106,7 @@ const Register = () => {
         if (!uppercasePassword) {
           toast.warn('At least one Uppercase!', {
             position: "bottom-right",
-            autoClose: 1000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -119,7 +117,7 @@ const Register = () => {
         } else if (!lowercasePassword) {
           toast.warn('At least one Lowercase!', {
             position: "bottom-right",
-            autoClose: 1000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -130,7 +128,7 @@ const Register = () => {
         } else if (!digitsPassword) {
           toast.warn('At least one digit', {
             position: "bottom-right",
-            autoClose: 1000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -141,7 +139,7 @@ const Register = () => {
         } else if (!specialCharPassword) {
           toast.warn('At least one Special Characters', {
             position: "bottom-right",
-            autoClose: 1000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -152,7 +150,7 @@ const Register = () => {
         } else if (!minLengthPassword) {
           toast.warn('At least minumum 8 characters!', {
             position: "bottom-right",
-            autoClose: 1000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -164,7 +162,7 @@ const Register = () => {
         else{
           toast.success( 'All condition is Excepted!', {
             position: "bottom-right",
-            autoClose: 1000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -191,7 +189,7 @@ const Register = () => {
       if (!uppercasePassword) {
         toast.warn('At least one Uppercase!', {
           position: "bottom-right",
-          autoClose: 1000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -202,7 +200,7 @@ const Register = () => {
       } else if (!lowercasePassword) {
         toast.warn('At least one Lowercase!', {
           position: "bottom-right",
-          autoClose: 1000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -213,7 +211,7 @@ const Register = () => {
       } else if (!digitsPassword) {
         toast.warn('At least one digit', {
           position: "bottom-right",
-          autoClose: 1000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -224,7 +222,7 @@ const Register = () => {
       } else if (!specialCharPassword) {
         toast.warn('At least one Special Characters', {
           position: "bottom-right",
-          autoClose: 1000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -235,7 +233,7 @@ const Register = () => {
       } else if (!minLengthPassword) {
         toast.warn('At least minumum 8 characters!', {
           position: "bottom-right",
-          autoClose: 1000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -247,7 +245,7 @@ const Register = () => {
       else{
         toast.success( 'All condition is Excepted!', {
           position: "bottom-right",
-          autoClose: 1000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -261,7 +259,7 @@ const Register = () => {
     if(input.ConfimPassword ==="") {
       toast.error('fill the Confirm password!', {
         position: "bottom-right",
-        autoClose: 1000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -273,7 +271,7 @@ const Register = () => {
     else if(input.ConfimPassword !== input.password){
       toast.error('Password and confirm password does not match', {
         position: "bottom-right",
-        autoClose: 1000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -287,7 +285,6 @@ const Register = () => {
        localStorage.setItem("user", JSON.stringify(input));
        navigate('signin')
      }
-
   }
   return (
     <>
@@ -362,8 +359,12 @@ const Register = () => {
           </span>
           {/* <p style={{ marginLeft: "2rem", color: "green" }}>{Confimmessage}</p> */}
           <br />
-          <button type="submit" className="btn-Submit">Register</button>
-        </div>
+          <button type="submit" className="btn-Submit">
+          Register
+        </button>
+        <Link to="/SignIn" className="reg">
+          <u >Login</u>
+        </Link>        </div>
       </form>
       <ToastContainer />
 
