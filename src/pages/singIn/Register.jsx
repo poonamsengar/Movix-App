@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link} from "react-router-dom";
-import "./style.scss";
+import "./regStyle.scss";
 import { FaRegUser, FaRegEye, FaUserNinja, FaRedRiver } from "react-icons/fa";
 import swal from 'sweetalert';
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,18 +11,41 @@ const Register = () => {
   const navigate = useNavigate();
   const [visible, setvisivle] = useState(false)
   const [Confimvisible, setConfimVisivle] = useState(false)
+
+  const loggedUserr = JSON.parse(localStorage.getItem("user"));
+
+  // if(loggedUserr){
+    // console.log(loggedUserr.email)
  
+  // }
+  
   const [input, setInput] = useState({
     name: "",
     email: "",
     password:"",
     ConfimPassword:"",
   });
+
+
   const FormhandelSubmit = (e) => {
     e.preventDefault()
-    const reg = /^[0-9A-Za-z]{5,16}$/
+    const reg = /^[0-9A-Za-z]{6,16}$/
+   
 
-    if (!input.name) {
+    // if(input.email === loggedUserr.email){
+    //   toast.error('email is already exist ', {
+    //     position: "bottom-right",
+    //     autoClose: 3000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "dark",
+    //   });
+    // }
+
+   if (!input.name) {
       toast.error('Fill the name ', {
         position: "bottom-right",
         autoClose: 1000,
@@ -35,8 +58,7 @@ const Register = () => {
       });
     }
     else if (!reg.test(input.name)) {
-     
-      toast.warn ('please insert [A-Z] [a-z] username ', {
+      toast.warn ('please insert [A-Z] [a-z]  username length should be greater than 6 alphabets not allow speacial charecter space.. ', {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -77,6 +99,7 @@ const Register = () => {
         });
       }
     }
+  
     if (!input.password) {
       toast.error('fill the password!', {
         position: "bottom-right",
@@ -280,15 +303,15 @@ const Register = () => {
         theme: "dark",
         });
     }
-    else{
-       swal("Good job!", "Congratulation you registered", "success");
-       localStorage.setItem("user", JSON.stringify(input));
-       navigate('signin')
-     }
+    else {
+        swal("Good job!", "Congratulation you registered", "success");
+        navigate('/SignIn')
+        localStorage.setItem("user", JSON.stringify(input));
+    }
   }
   return (
     <>
-      <form onSubmit={FormhandelSubmit} className="form-Register">
+      <form onSubmit={FormhandelSubmit} className="form-Registerr">
         <div className="insideForm">
           <h1>SignUp</h1>
           <label>user name</label> <br />
@@ -306,9 +329,9 @@ const Register = () => {
           <span className="iconn">
             <FaRegUser />
           </span>
-          {/* <p style={{ marginLeft: "2rem", color: "red" }}>{message}</p> */}
-          <br />
-          <label>user email</label> <br />
+            <li style={{fontSize:".7rem", marginLeft:"2rem", marginTop:".5rem", color:"gray"}}> speacial characters and Symbol are not allow</li>
+            <li style={{fontSize:".7rem", marginLeft:"2rem", color:"gray",marginBottom:".9rem"}}> space are not allow</li>
+          <label>user email</label> <br/>
           <input
             className="insideInput"
             autoComplete="off"
@@ -340,7 +363,6 @@ const Register = () => {
           <span className="iconn" onClick={() => setvisivle(!visible)}>
             {visible ? <FaRegEye /> : <FaRedRiver />}
           </span>
-          {/* <p style={{ marginLeft: "2rem", color: "green" }}>{message}</p> */}
           <br />
           <label>Confirm password</label>
           <input
@@ -364,7 +386,8 @@ const Register = () => {
         </button>
         <Link to="/SignIn" className="reg">
           <u >Login</u>
-        </Link>        </div>
+        </Link>
+      </div>
       </form>
       <ToastContainer />
 
@@ -372,5 +395,6 @@ const Register = () => {
     </>
   );
 };
+
 
 export default Register;

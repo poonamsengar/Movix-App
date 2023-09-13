@@ -23,20 +23,44 @@ const SignIn = () => {
   const handelLogin = (e) => {
     e.preventDefault();
     const loggedUser = JSON.parse(localStorage.getItem("user"));
-    
+// console.log(loggedUser)
+   
+     if(!input.email){
+      toast.error('please fill the email !', {
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+    else if(!input.password){
+      toast.error('please fill the password !', {
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
     if (
       input.email === loggedUser.email &&
       input.password === loggedUser.password 
     ) {
       localStorage.setItem("loggedin", true);
       navigate("/");
-      swal("Conratulation you  Login!", "", "success");
-    } 
- 
-    else if( input.email === "" && input.password === ""){
-      toast.error(' Please fill the all detail is mendatory', {
+      swal("Good job!", "Congratulation you Login", "success");
+    }
+    else if(input.email !== loggedUser.email){
+      toast.error('please fill the correct email !', {
         position: "bottom-right",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -44,11 +68,11 @@ const SignIn = () => {
         progress: undefined,
         theme: "dark",
         });
-    }
-    else if(input.email === "" ){
-      toast.warn(' Please fill the email', {
+      }
+    else if(input.password !== loggedUser.password){
+      toast.error('please fill the correct password !', {
         position: "bottom-right",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -56,72 +80,14 @@ const SignIn = () => {
         progress: undefined,
         theme: "dark",
         });
-    }
-    else if(input.password === ""){
-      toast.warn(' Please fill the password', {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
-    }
-    else  if (
-      input.email !== loggedUser.email &&
-      input.password == loggedUser.password 
-    ) {
-      toast.error(' Please insert valid email', {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
-    }
-    else  if (
-      input.email === loggedUser.email &&
-      input.password !== loggedUser.password 
-    ) {
-      toast.error(' Please insert valid password', {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
-    }
-
-    else  if (
-      input.email !== loggedUser.email &&
-      input.password !== loggedUser.password 
-    ) {
-      toast.error(' Please insert valid email password', {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
-    }
-
+      }
+    
   };
 
   return (
     <>
-    <form onSubmit={handelLogin} className="form-Register">
-      <div className="insideForm">
+    <form onSubmit={handelLogin} className="form-Register regiD">
+      <div>
         <h1>SignIn</h1>
         <label>user email</label> <br />
         <input
@@ -164,7 +130,7 @@ const SignIn = () => {
       </div>
     </form>
     <ToastContainer/>
-</>
+  </>
   );
 };
 
